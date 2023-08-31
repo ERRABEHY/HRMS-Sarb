@@ -2,4 +2,4 @@
 
   require_once '../app/init.php';
 
-  $dcore  = new Core();
+  $core  = new Core();
