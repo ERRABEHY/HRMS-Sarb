@@ -9,6 +9,7 @@
 
       protected $currentControler = 'Homes';
       protected $currentMethod = 'login';
+      // protected $dptMethod = 'dashboard';
       protected $params = [];
 
       public function __construct()
@@ -16,11 +17,33 @@
         // the requisted url
         $url=$this->getUrl();
 
-        // look for the requested page if exist and assign it to currentControler
-        if(isset($url[0]) && file_exists('../app/Controllers/'.ucfirst($url[0]).'.php')){
-          $this->currentControler=ucfirst($url[0]);
-          unset($url[0]);  
-        }
+
+         if (!empty($url)) {
+            if ($url[0] === 'department') {
+                $this->currentControler = 'Depart';
+                $this->currentMethod = 'dashboard';
+                unset($url[0]);
+
+            }elseif($url[0] === 'dashboard')
+            {
+                $this->currentControler = 'Homes';
+                $this->currentMethod = 'dashboard';
+                unset($url[0]);
+
+            }elseif($url[0] === 'editdpt' || $url[0] === 'edit' )
+            {
+                $this->currentControler = 'Depart';
+                $this->currentMethod = 'editdpt';
+                unset($url[0]);
+
+            }
+
+            // Check if the requested page exists and assign it to currentControler
+            if (isset($url[0]) && file_exists('../app/Controllers/' . ucfirst($url[0]) . '.php')) {
+                $this->currentControler = ucfirst($url[0]);
+                unset($url[0]);
+            }
+      }
 
         // bring the requisted page from the Controllers
         require_once '../app/Controllers/'.$this->currentControler.'.php';

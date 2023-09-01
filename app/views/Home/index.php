@@ -10,15 +10,15 @@ if (!empty($data['error'])) {
   
   <form action="index.php?action=login" method = "post">
     <div class="form-field">
-      <input type="email" placeholder="Email" required/>
+      <input type="email" name="email" placeholder="Email" required/>
     </div>
     
     <div class="form-field">
-      <input type="password" placeholder="Password" required/>
+      <input type="password" name="passwd" placeholder="Password" required/>
     </div>
     
     <div class="form-field">
-      <button class="btn" type="submit">Log in</button>
+      <button class="btn" type="submit" name="submit">Log in</button>
     </div>
   </form>
 

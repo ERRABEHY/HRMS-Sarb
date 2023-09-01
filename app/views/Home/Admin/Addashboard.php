@@ -32,7 +32,7 @@
                   </a>
                 </li>
                 <li class="sidebar-list-item">
-                  <a href="../departments/mydepartments.html" >
+                  <a href="department" >
                     <span class="material-icons-outlined">
                       assured_workload </span> Departments
                   </a>
@@ -73,15 +73,13 @@
         </div>
 
         <div class="main-cards">
-
-          <a href="../departments/mydepartments.html" class="card">
+          <a href="department" class="card">
             <div class="card-inner">
               <p class="text-primary">Departments</p>
               <span class="material-icons-outlined text-blue">inventory_2</span>
             </div>
             <span class="text-primary font-weight-bold"><?= $data['departments'] ?></span>
           </a>
-
           <a href ="../Employees/staf.html" class="card">
             <div class="card-inner">
               <p class="text-primary">Employees</p>

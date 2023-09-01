@@ -11,7 +11,7 @@ class Homes extends Controller
             if (empty($email) || empty($password)) {
                 $data['error'] = 'emptyInput';
                 $this->views('Home/index', $data);
-                // return; 
+                return; // Return to stop further execution
             }
 
             $userModel = $this->models('User');
@@ -30,16 +30,17 @@ class Homes extends Controller
                 }
                 
                 if (preg_match("/@rh.com$/i", $email)) {
-                    $adminModel = $this->models('Admin');
-                    $adminModel->getdept();
-                    $data['departments'] = $adminModel->getdept();
-                    $data['employees'] = $adminModel->getUsers();
-                    $data['presents'] = $adminModel->getPrs();
-                    $data['absents'] = $adminModel->getAbs();
-                    $data['requests'] = $adminModel->getReqts();
-                    $data['message'] = "Admin ";
-                    $this->views('Home/Admin/Addashboard', $data);
+                        $adminModel = $this->models('Admin');
+                        $adminModel->getdept();
+                        $data['departments'] = $adminModel->getdept();
+                        $data['employees'] = $adminModel->getUsers();
+                        $data['presents'] = $adminModel->getPrs();
+                        $data['absents'] = $adminModel->getAbs();
+                        $data['requests'] = $adminModel->getReqts();
+                        $data['message'] = "Admin ";
+                        $this->views('Home/Admin/Addashboard', $data);
                 } else {
+                    $userModel = $this->models('User');
                     $data['attendance'] = $userModel->getAttendance($data['userName']);
                     $data['NbrRequest'] = $userModel->getRequest($data['userName']);
                     $this->views('Home/Employee/dashboard', $data);
@@ -52,4 +53,18 @@ class Homes extends Controller
             $this->views('Home/index');
         }
     }
+
+    public function dashboard()
+    {
+        $adminModel = $this->models('Admin');
+        $adminModel->getdept();
+        $data['departments'] = $adminModel->getdept();
+        $data['employees'] = $adminModel->getUsers();
+        $data['presents'] = $adminModel->getPrs();
+        $data['absents'] = $adminModel->getAbs();
+        $data['requests'] = $adminModel->getReqts();
+        $data['message'] = "Admin ";
+        $this->views('Home/Admin/Addashboard', $data);
+    }
 }
+

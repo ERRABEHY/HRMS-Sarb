@@ -12,7 +12,7 @@
 
     public function getdept()
     {
-       $this->Database->query('SELECT COUNT(*) FROM Department');
+       $this->Database->query('SELECT COUNT(*) FROM department');
         $count = $this->Database->fetchColumn(); 
         
         return $count;
