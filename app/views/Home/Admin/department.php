@@ -105,12 +105,12 @@
                 </tbody>
           </table>
           hr
-           <form class="add-department-section" action="" method="post">
+           <form class="add-department-section" action="addNewDpr" method="post">
           <h2>Add a New Department</h2>
           <div class="add-department-form">
-            <input type="text" name="dptName" id="newDepartmentName" placeholder="Enter department name">
-            <input type="text" name="headName" id="newHeadName" placeholder="Enter the Head of department ">
-            <button type="submit" id="addDepartmentButton">Add Department</button>
+            <input type="text" name="dptName" id="newDepartmentName" placeholder="Enter department name" require>
+            <input type="text" name="headName" id="newHeadName" placeholder="Enter the Head of department " require>
+            <button type="submit" name="addNewDpr" id="addDepartmentButton">Add Department</button>
           </div>
         </form>
         </div>

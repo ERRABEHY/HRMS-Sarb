@@ -30,7 +30,7 @@
                 $this->currentMethod = 'dashboard';
                 unset($url[0]);
 
-            }elseif($url[0] === 'editdpt' || $url[0] === 'edit' )
+            }elseif($url[0] === 'editdpt' || $url[0] === 'edit'  || $url[0] === 'addNewDpr'  )
             {
                 $this->currentControler = 'Depart';
                 $this->currentMethod = 'editdpt';

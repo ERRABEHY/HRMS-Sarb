@@ -39,4 +39,21 @@
         $this->Database->bind(':Id', $Id);
         $this->Database->execute();
     }
+    public function Insert($dpt, $head)
+    {
+        $this->Database->query('INSERT INTO department(dpName, headDpt) VALUES( :dpr,  :head )');
+        $this->Database->bind(':dpr', $dpt);
+        $this->Database->bind(':head', $head);
+        $this->Database->execute();
+    }
+    public function check($dpt, $head)
+    {
+        $this->Database->query('SELECT COUNT(*) FROM department WHERE dpName = :dpr or headDpt = :head');
+        $this->Database->bind(':dpr', $dpt);
+        $this->Database->bind(':head', $head);
+        $rowCount = $this->Database->fetchColumn(); 
+
+        return ($rowCount > 0);
+    }
+
   }
