@@ -8,9 +8,12 @@
         <div class="menu-icon" onclick="openSidebar()">
           <span class="material-icons-outlined">menu</span>
         </div>
-        <h2 class="welcome" ><?= $data['userName']  ?></h2>
+        <h2 class="welcome" ><?= "Mrs. " . $_SESSION['userName'] ?></h2>
         <div class="header-right">
           <span class="material-icons-outlined">account_circle</span>
+          <a href="logout">
+            <span class="material-symbols-outlined">logout</span>
+          </a>
         </div>
       </header>
            <aside id="sidebar">
@@ -23,7 +26,7 @@
       
               <ul class="sidebar-list">
                 <li class="sidebar-list-item">
-                  <a href="#" >
+                  <a href="dashboard" >
                     <span class="material-icons-outlined">dashboard</span> Dashboard
                   </a>
                 </li>
@@ -33,17 +36,12 @@
                   </a>
                 </li>
                 <li class="sidebar-list-item">
-                  <a href="../Presence/Presence.html" >
-                    <span class="material-icons-outlined">view_list  </span> Presence
-                  </a>
-                </li>
-                <li class="sidebar-list-item">
                   <a href="../salaries/salaries.html" >
                     <span class="material-icons-outlined">credit_score</span> salaries
                   </a>
                 </li>
                 <li class="sidebar-list-item">
-                  <a href="../Requests/Requests.html" >
+                  <a href="requestEmp" >
                     <span class="material-icons-outlined"> note_alt</span> Requests 
                   </a>
                 </li>
@@ -63,7 +61,7 @@
         </div>
 
         <div class="main-cards">
-          <a href ="../Presence/Presence.html"  class="card">
+          <a href ="#"  class="card">
             <div class="card-inner">
               <p class="text-primary">Presents</p>
               <span class="material-symbols-outlined text-green">how_to_reg</span>
@@ -71,14 +69,14 @@
             <span class="text-primary font-weight-bold"><?= $data['attendance']->present ?></span>
           </a>
 
-          <a href ="../Presence/Presence.html" class="card">
+          <a href ="#" class="card">
             <div class="card-inner">
               <p class="text-primary">Absents</p>
               <span class="material-symbols-outlined text-red">unpublished</span>
             </div>
             <span class="text-primary font-weight-bold"><?= $data['attendance']->absnt?></span>
           </a>
-          <a href ="../Requests/Requests.html" class="card">
+          <a href ="requestEmp" class="card">
             <div class="card-inner">
               <p class="text-primary">Requests</p>
               <span class="material-symbols-outlined text-blue1">notification_add</span>
@@ -179,6 +177,10 @@
 .header-right {
   position: absolute;
   right: 20px;
+}
+.header-right  a span {
+  color: #666666;
+
 }
 .menu-icon {
   display: none;
@@ -332,52 +334,6 @@
   font-size: 35px;
 }
 
-.charts {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-}
-
-.charts-card {
-  background-color: #ffffff;
-  margin-bottom: 20px;
-  padding: 25px;
-  box-sizing: border-box;
-  -webkit-column-break-inside: avoid;
-  border: 1px solid #d2d2d3;
-  border-radius: 5px;
-  box-shadow: 0 6px 7px -4px rgba(0, 0, 0, 0.2);
-}
-
-.chart-title {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 22px;
-  font-weight: 600;
-}
-
-
-/* ---------- SCROLLBARS ---------- */
-
-::-webkit-scrollbar {
-  width: 5px;
-  height: 6px;
-}
-
-::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 5px #a5aaad;
-  border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb {
-  background-color: #4f35a1;
-  border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background-color: #a5aaad;
-}
 
 
 /* ---------- MEDIA QUERIES ---------- */

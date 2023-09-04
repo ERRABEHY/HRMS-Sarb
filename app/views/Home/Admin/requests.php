@@ -1,19 +1,17 @@
 <?php require_once '../app/views/Inc/header.php'; ?>
-
-    <title>Admin Department</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap" rel="stylesheet">
-    <link href = "https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel = "stylesheet">
-   </head>
+<title>Requests Dashboard</title>
+  </head>
   <body>
-     <div class="grid-container">
+    <div class="grid-container">
       <header class="header">
         <div class="menu-icon" onclick="openSidebar()">
           <span class="material-icons-outlined">menu</span>
         </div>
         <div class="header-right">
-          <a href="logout">
+            <a href="logout">
             <span class="material-symbols-outlined">logout</span>
           </a>
+          
         </div>
       </header>
       <!-- End Header -->
@@ -65,64 +63,93 @@
             </li>
           </ul>
         </aside>
-  <!-- End Sidebar -->     
-      <!-- Main -->
       <main class="main-container">
         <div class="main-title">
-          <h2>Departments </h2>
+          <h2>Pending Requests</h2>
         </div>
-          <table class="main-cards dpt">
+          <table class="main-cards">
                <th >
                   <tr class="th">
                     <td>Id </td>
-                    <td>Detdartment Name</td>
-                    <td>Head Department Name</td>
-                    <td>Employees Number</td>
+                    <td>Employees</td>
+                    <td>Type</td>
+                    <td>Description</td>
                     <td >Operation</td>
                   </tr>
                </th>
                 <tbody class="tbody">
+                   <?php 
+                    $id = 1;
+                    foreach ($data['emp'] as $key => $value) {
+                    ?>
+                        <tr>
+                            <td><?= $id++ ?></td>
+                            <td><?=  $value->emp ?></td>
+                            <td><?= $value->type ?></td>                         
+                            <td><?= $value->description ?></td>                         
+                            <td>
+                              <form action="requests" method="post">
+                                <input type="hidden" name="Id" value="<?= $value->id ?>" >
+                                <input type="hidden" name="emp" value="<?= $value->emp ?>" >
+                                <input type="hidden" name="type" value="<?= $value->type ?>" >
+                                <input type="hidden" name="description" value="<?= $value->description ?>" >
+                                <button type="submit" name="Rejected">
+                                      <span class="material-symbols-outlined del">cancel</span>
+                                </button>
+                                <button type="submit" name="Approved">
+                                      <span class="material-symbols-outlined edit">check_circle</span>
+                                </button>
+                              </form>
+                            </td>                         
+                        </tr>                  
                     <?php
-                     foreach ($data['departmentData'] as $key => $value) { ?>
-                    <tr>
-                        <td><?php echo $key + 1; ?></td>
-                        <td><?php echo $value['name']; ?></td>
-                        <td><?php echo $value['headDpt']; ?></td>
-                        <td><?php echo $value['employee_count']; ?></td>
-                        <td>
-                        <form action="editdpt" method="post">
-                            <input type="hidden" name="dprId" value=" <?= $value['id'] ?>">
-                            <button type="submit" name="editdpt">
-                            <span class="material-symbols-outlined edit">edit</span>
-                            </button>
-                            <button type="submit" name="del">
-                                <span class="material-symbols-outlined del">delete</span>
-                            </button>
-                        </form>
-                        </td>
-                     <?php 
-                    echo "</tr>";
-                    }
-                    ?>            
+                    } 
+                    ?>      
                 </tbody>
           </table>
-          hr
-           <form class="add-department-section" action="addNewDpr" method="post">
-          <h2>Add a New Department</h2>
-          <div class="add-department-form">
-            <input type="text" name="dptName" id="newDepartmentName" placeholder="Enter department name" require>
-            <input type="text" name="headName" id="newHeadName" placeholder="Enter the Head of department " require>
-            <button type="submit" name="addNewDpr" id="addDepartmentButton">Add Department</button>
+          <br>
+          <hr>
+          <br>
+          <div class="main-title">
+          <h2>Requests History </h2>
+        </div>
+          <table class="main-cards">
+               <th >
+                  <tr class="th">
+                    <td>Id </td>
+                    <td>Employees</td>
+                    <td>Type</td>
+                    <td>Description</td>
+                    <td >Status</td>
+                  </tr>
+               </th>
+                <tbody class="tbody">
+                  <?php 
+                    $id = 1;
+                    foreach ($data['EmpAll'] as $key => $value) {
+                    ?>
+                        <tr>
+                            <td><?= $id++ ?></td>
+                            <td><?= $value->emp ?></td>
+                            <td><?= $value->type ?></td>                         
+                            <td><?= $value->description ?></td> 
+                            <?php  
+            
+                            if ($value->status == 'Approved') {
+                                echo "<td class='Approved'>". "Approved" . "</td>";
+                            } else {
+                                echo "<td class='Rejected'>". "Rejected" . "</td>";
+                            }
+                            ?>
+                    <?php
+                    } 
+                    ?>  
+                </tbody>
+          </table>
           </div>
-        </form>
-        </div>
-
-       
-        </div>
-       
-      
+        </div>    
+        
       </main>
-      <!-- End Main -->
       <style>
         
 body {
@@ -176,6 +203,7 @@ body {
 
 /* ---------- HEADER ---------- */
 
+
 .header {
   position: relative;
   grid-area: header;
@@ -198,7 +226,6 @@ body {
   display: none;
   cursor: pointer;
 }
-
 
 
 /* ---------- SIDEBAR ---------- */
@@ -257,7 +284,6 @@ body {
   z-index: 12 !important;
 }
 
-/* ---------- MAIN ---------- */
 
 .main-container {
   grid-area: main;
@@ -270,14 +296,15 @@ body {
   justify-content: space-between;
   color: #312020; /* Set the color to black */
 }
-
 .main-cards {
+  grid-area: main;
   color: black;
   width: 100%;
-
 }
 table td {
   text-align: center;
+  position: relative;
+
 }
 .main-cards td {
   padding: 10px;
@@ -291,15 +318,12 @@ table td {
 .main-cards .th {
   background-color: #b3aeaea1;
 }
+
 .main-cards .th td {
   padding: 15px;
 }
-.main-cards td .material-symbols-outlined {
-  color: white;
-  padding: 5px;
-  border-radius: 30px;
-  opacity: 0.7;
-}
+
+
 .main-cards td .del {
   background-color: rgba(255, 0, 0, 0.685);
 }
@@ -309,14 +333,21 @@ table td {
   background-color: transparent;
   cursor: pointer;
 }
+.main-cards button span {
+  padding: 4px;
+  border-radius: 50%;
+  color: white;
+}
 .main-cards td .edit {
- background-color: rgba(0, 128, 0, 0.671);
+  background-color: rgba(0, 128, 0, 0.671);
+}
+.main-cards tr .Rejected {
+  color: red;
 }
 
-
-/* ---------- MEDIA QUERIES ---------- */
-
-/* Medium <= 992px */
+.main-cards tr .Approved {
+ color: rgba(0, 128, 0, 0.671);
+}
 
 @media screen and (max-width: 992px) {
   .grid-container {
@@ -338,109 +369,24 @@ table td {
   .sidebar-title > span {
     display: inline;
   }
- 
+
   .main-cards .main-title {
     text-align: center;
   }
 
-  .main-cards .th {
-    display: none;
-  }
-
-  .main-cards .tbody tr {
+  .main-cards .tbody td {
     background-color: rgba(0, 0, 0, 0.05);
     border-radius: 6px;
     margin-bottom: 10px;
+    overflow: hidden;
   }
-
+  
   .main-cards td {
     padding: 10px;
   }
-
-  .main-cards td .material-symbols-outlined {
-    padding: 3px;
-    border-radius: 50%;
-    opacity: 1;
-  }
-
-  .add-department-section {
-    margin-top: 20px;
-  }
-
-  .add-department-form {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .add-department-form input[type="text"] {
-    width: 100%;
-    margin-right: 0;
-    margin-bottom: 10px;
-  }
-
-  .add-department-form button {
-    width: 100%;
-    padding: 10px;
-    margin: 0;
-  }
-}
-
-
-.add-department-section {
-  margin-top: 20px;
-  grid-column: sidebar;
-  grid-row: 2 / 3;
-  padding: 20px;
-  background-color: #ffffff;
-  border-radius: 6px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.add-department-section h2 {
-  font-size: 18px;
-  margin-bottom: 10px;
-  color: #333333;
-}
-
-.add-department-form {
-  display: flex;
-  align-items: center;
-}
-
-.add-department-form input[type="text"] {
-  flex-grow: 1;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  margin-right: 10px;
-}
-
-.add-department-form button {
-  padding: 10px 20px;
-  background-color: #22c55e;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.add-department-form button:hover {
-  background-color: #1c9951;
 }
 
 
 
-@media screen and (max-width: 768px) {
-  .main-cards {
-    grid-template-columns: 1fr;
-    gap: 10px;
-    margin-bottom: 0;
-  }
-}
-
-
-</style>
-
-    
-
+      </style>
 <?php require_once '../app/views/Inc/footer.php'; ?>

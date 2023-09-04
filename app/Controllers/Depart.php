@@ -1,6 +1,7 @@
 <?php 
   class Depart extends Controller 
   {
+             
     public function dashboard()
     {       
            $userModel = $this->models('Dahboard');
@@ -14,7 +15,7 @@
                 $departmentHead = $value->headDpt; 
                 $employeeCount = $userModel->getSum($departmentName);
 
-                $departmentData[] = [
+                    $departmentData[] = [
                     'id' => $departmentId,
                     'name' => $departmentName,
                     'headDpt' => $departmentHead,
@@ -24,7 +25,7 @@
 
             $data['departmentData'] = $departmentData;
             $this->views('Home/Admin/department', $data);
-
+  
 
     }
     
@@ -35,6 +36,8 @@
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['editdpt']))
         {
             $data['id'] = $_POST['dprId'];
+            $this->views('Home/Admin/edit_department', $data);
+            exit();
 
         }elseif ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit'])) {
             $data['Id'] = $_POST['Id'];
@@ -46,7 +49,8 @@
 
         }elseif ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['del'])) {
             $data['Id'] = $_POST['dprId'];
-            $userModel->del($data['Id']);
+            $data['dpt'] = $userModel->del($data['Id']);
+
 
         }elseif ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['addNewDpr'])) {
             
@@ -54,11 +58,11 @@
             $data['dptName'] = $_POST['dptName'];
             $permission = $userModel->check($data['dptName'], $data['headName']);
             if (!$permission ) {
-                $userModel->Insert($data['dptName'], $data['headName']);       
+                $userModel->Insert($data['dptName'], $data['headName']);      
             }else{
-                $data['message'] = 'data already in the database';
+                $_SESSION['message'] = 'data already in the database';
             }
-        }  
+        }
        $this->dashboard();
     }
 

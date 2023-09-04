@@ -33,12 +33,14 @@
         $this->Database->bind(':Id', $Id);
         $this->Database->execute();
     }
+     
     public function del($Id)
     {
         $this->Database->query('DELETE FROM department WHERE id = :Id');
         $this->Database->bind(':Id', $Id);
         $this->Database->execute();
     }
+
     public function Insert($dpt, $head)
     {
         $this->Database->query('INSERT INTO department(dpName, headDpt) VALUES( :dpr,  :head )');

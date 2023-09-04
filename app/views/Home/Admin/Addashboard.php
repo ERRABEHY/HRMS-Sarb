@@ -8,10 +8,12 @@
         <div class="menu-icon" onclick="openSidebar()">
           <span class="material-icons-outlined">menu</span>
         </div>
-                <?=$data['message']?>
-        <h1></h1>
+                <?= "Mrs. " . $data['message'] ?>
         <div class="header-right">
           <span class="material-icons-outlined">account_circle</span>
+          <a href="logout">
+            <span class="material-symbols-outlined">logout</span>
+          </a>
         </div>
       </header>
       <!-- End Header -->
@@ -43,7 +45,7 @@
                   </a>
                 </li>
                 <li class="sidebar-list-item">
-                  <a href="../Presence/Presence.html" >
+                  <a href="presence" >
                     <span class="material-icons-outlined">view_list  </span> Presence
                   </a>
                 </li>
@@ -53,7 +55,7 @@
                   </a>
                 </li>
                 <li class="sidebar-list-item">
-                  <a href="../Requests/Requests.html" >
+                  <a href="requests" >
                     <span class="material-icons-outlined"> note_alt</span> Requests 
                   </a>
                 </li>
@@ -87,7 +89,7 @@
             </div>
             <span class="text-primary font-weight-bold"><?= $data['employees'] ?> </span>
           </a>
-          <a href ="../Presence/Presence.html"  class="card">
+          <a href ="presence"  class="card">
             <div class="card-inner">
               <p class="text-primary">Presents</p>
               <span class="material-symbols-outlined text-green">how_to_reg</span>
@@ -95,14 +97,14 @@
             <span class="text-primary font-weight-bold"><?= $data['presents'] ?> </span>
           </a>
 
-          <a href ="../Presence/Presence.html" class="card">
+          <a href ="presence" class="card">
             <div class="card-inner">
               <p class="text-primary">Absents</p>
               <span class="material-symbols-outlined text-red">unpublished</span>
             </div>
             <span class="text-primary font-weight-bold"><?= $data['absents']  ?></span>
           </a>
-          <a href ="../Requests/Requests.html" class="card">
+          <a href ="requests" class="card">
             <div class="card-inner">
               <p class="text-primary">Requests</p>
               <span class="material-symbols-outlined text-blue1">notification_add</span>
@@ -204,13 +206,14 @@
   position: absolute;
   right: 20px;
 }
+.header-right  a {
+  color: #666666;
+}
 .menu-icon {
   display: none;
   cursor: pointer;
 }
-.header h2 {
-    text-transform: uppercase;
-}
+
 
 /* ---------- SIDEBAR ---------- */
 

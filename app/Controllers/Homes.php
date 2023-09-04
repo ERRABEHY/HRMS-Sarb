@@ -2,6 +2,15 @@
 
 class Homes extends Controller
 {
+     public function dashboardUser()
+    {
+        $userModel = $this->models('User');
+        $data['message'] = "employee";
+        $data['attendance'] = $userModel->getAttendance($_SESSION['userName']);
+        $data['NbrRequest'] = $userModel->getRequest($_SESSION['userName']);
+        $this->views('Home/Employee/dashboard', $data);
+    }
+
     public function login()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -11,14 +20,15 @@ class Homes extends Controller
             if (empty($email) || empty($password)) {
                 $data['error'] = 'emptyInput';
                 $this->views('Home/index', $data);
-                return; // Return to stop further execution
+                return; 
             }
 
             $userModel = $this->models('User');
             $isValidUser = $userModel->validateUser($email, $password);
 
             if ($isValidUser) {
-                $data['userName'] =  $userModel->getUser($email);
+                $_SESSION['userName'] =  $userModel->getUser($email);
+                $data['userName'] = $_SESSION['userName'];
                 $dateOfDB =  $userModel->checkAttendance($data['userName']);
                 $presentDay = $userModel->getPrDay($data['userName']);
 
@@ -40,10 +50,7 @@ class Homes extends Controller
                         $data['message'] = "Admin ";
                         $this->views('Home/Admin/Addashboard', $data);
                 } else {
-                    $userModel = $this->models('User');
-                    $data['attendance'] = $userModel->getAttendance($data['userName']);
-                    $data['NbrRequest'] = $userModel->getRequest($data['userName']);
-                    $this->views('Home/Employee/dashboard', $data);
+                    $this->dashboardUser();
                 }
             } else {
                 $data['error'] = 'Invalid email or password.';
@@ -66,5 +73,6 @@ class Homes extends Controller
         $data['message'] = "Admin ";
         $this->views('Home/Admin/Addashboard', $data);
     }
+   
 }
 

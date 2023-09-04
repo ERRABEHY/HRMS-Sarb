@@ -10,6 +10,7 @@
         <div class="menu-icon" onclick="openSidebar()">
           <span class="material-icons-outlined">menu</span>
         </div>
+        <h2 class="welcome" ><?= "Mrs. " . $_SESSION['userName'] ?></h2>
         <div class="header-right">
           <a href="logout">
             <span class="material-symbols-outlined">logout</span>
@@ -28,14 +29,8 @@
   
           <ul class="sidebar-list">
             <li class="sidebar-list-item">
-              <a href="dashboard" >
+              <a href="dashboardUser" >
                 <span class="material-icons-outlined">dashboard</span> Dashboard
-              </a>
-            </li>
-            <li class="sidebar-list-item">
-              <a href="department" >
-                <span class="material-icons-outlined">
-                  assured_workload </span> Departments
               </a>
             </li>
             <li class="sidebar-list-item">
@@ -54,7 +49,7 @@
               </a>
             </li>
             <li class="sidebar-list-item">
-              <a href="requests" >
+              <a href="requestEmp" >
                 <span class="material-icons-outlined"> note_alt</span> Requests 
               </a>
             </li>
@@ -68,59 +63,60 @@
   <!-- End Sidebar -->     
       <!-- Main -->
       <main class="main-container">
-        <div class="main-title">
-          <h2>Departments </h2>
+         <div class="main-title">
+          <h2>Requests History </h2>
         </div>
-          <table class="main-cards dpt">
+          <table class="main-cards">
                <th >
                   <tr class="th">
                     <td>Id </td>
-                    <td>Detdartment Name</td>
-                    <td>Head Department Name</td>
-                    <td>Employees Number</td>
-                    <td >Operation</td>
+                    <td>Type</td>
+                    <td>Description</td>
+                    <td>Status</td>
                   </tr>
                </th>
                 <tbody class="tbody">
+                  <?php 
+                    $id = 1;
+                    foreach ($data['emp'] as $key => $value) {
+                    ?>
+                        <tr>
+                            <td><?= $id++ ?></td>
+                            <td><?= $value->type ?></td>                         
+                            <td><?= $value->description ?></td> 
+                            <?php  
+            
+                            if ($value->status == 'Approved') {
+                                echo "<td class='Approved'>". "Approved" . "</td>";
+                            } elseif ($value->status == 'Rejected') {
+                                echo "<td class='Rejected'>". "Rejected" . "</td>";
+                            }else{
+                                echo "<td class='Pending' >". "Pending" . "</td>";
+                            }
+                            ?>
                     <?php
-                     foreach ($data['departmentData'] as $key => $value) { ?>
-                    <tr>
-                        <td><?php echo $key + 1; ?></td>
-                        <td><?php echo $value['name']; ?></td>
-                        <td><?php echo $value['headDpt']; ?></td>
-                        <td><?php echo $value['employee_count']; ?></td>
-                        <td>
-                        <form action="editdpt" method="post">
-                            <input type="hidden" name="dprId" value=" <?= $value['id'] ?>">
-                            <button type="submit" name="editdpt">
-                            <span class="material-symbols-outlined edit">edit</span>
-                            </button>
-                            <button type="submit" name="del">
-                                <span class="material-symbols-outlined del">delete</span>
-                            </button>
-                        </form>
-                        </td>
-                     <?php 
-                    echo "</tr>";
-                    }
-                    ?>            
+                    } 
+                    ?>  
                 </tbody>
           </table>
-          hr
-           <form class="add-department-section" action="addNewDpr" method="post">
-          <h2>Add a New Department</h2>
+          <hr>
+           <form class="add-department-section" action="addNewRequest" method="post">
+          <h2>Add a New Request</h2>
           <div class="add-department-form">
-            <input type="text" name="dptName" id="newDepartmentName" placeholder="Enter department name" require>
-            <input type="text" name="headName" id="newHeadName" placeholder="Enter the Head of department " require>
-            <button type="submit" name="addNewDpr" id="addDepartmentButton">Add Department</button>
+            <select name="reqName" require>
+                <option value="Leave Request">Leave Request</option>
+                <option value="Emergency Request">Emergency Request</option>
+                <option value="Compensation Request">Compensation Request</option>
+                <option value="Time Off Request">Time Off Request</option>
+                <option value="Insurance Request">Insurance Request</option>
+                <option value="Remote Work Request">Remote Work Request</option>
+            </select>
+            <input type="text" name="descName" id="newDepartmentName" placeholder="Enter request name" require>
+            <button type="submit" name="addRequest" id="addDepartmentButton">Add Request</button>
           </div>
         </form>
         </div>
-
-       
-        </div>
-       
-      
+        </div>      
       </main>
       <!-- End Main -->
       <style>
@@ -300,19 +296,16 @@ table td {
   border-radius: 30px;
   opacity: 0.7;
 }
-.main-cards td .del {
-  background-color: rgba(255, 0, 0, 0.685);
-}
-.main-cards button {
-  border: 0px;
-  outline: 0px;
-  background-color: transparent;
-  cursor: pointer;
-}
-.main-cards td .edit {
- background-color: rgba(0, 128, 0, 0.671);
+.main-cards tr .Rejected {
+  color: red;
 }
 
+.main-cards tr .Approved {
+ color: green;
+}
+.main-cards tr .Pending {
+ color: orange;
+}
 
 /* ---------- MEDIA QUERIES ---------- */
 
