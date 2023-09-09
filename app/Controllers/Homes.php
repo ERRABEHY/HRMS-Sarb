@@ -8,7 +8,7 @@ class Homes extends Controller
         $data['message'] = "employee";
         $data['attendance'] = $userModel->getAttendance($_SESSION['employee-id']);
         $data['NbrRequest'] = $userModel->getRequest($_SESSION['employee-id']);
-        $this->views('Home/Employee/dashboard', $data);
+        $this->views('Employee/dashboard', $data);
     }
 
     public function login()
@@ -19,7 +19,7 @@ class Homes extends Controller
 
             if (empty($email) || empty($password)) {
                 $data['error'] = 'emptyInput';
-                $this->views('Home/index', $data);
+                $this->views('index', $data);
                 return; 
             }
 
@@ -51,7 +51,7 @@ class Homes extends Controller
                     $data['absents'] = $adminModel->getAbs();
                     $data['requests'] = $adminModel->getReqts();
                     $data['message'] = "Admin ";
-                    $this->views('Home/Admin/Addashboard', $data);
+                    $this->views('Admin/Addashboard', $data);
                 } else {
                     $this->dashboardUser();
                 }
@@ -74,7 +74,7 @@ class Homes extends Controller
         $data['absents'] = $adminModel->getAbs();
         $data['requests'] = $adminModel->getReqts();
         $data['message'] = "Admin ";
-        $this->views('Home/Admin/Addashboard', $data);
+        $this->views('Admin/Addashboard', $data);
     }
    
 }

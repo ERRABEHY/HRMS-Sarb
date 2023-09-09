@@ -1,4 +1,11 @@
-<?php require_once '../app/views/Inc/header.php'; ?>
+<?php require_once '../app/views/Inc/header.php';
+
+  if (!empty($_SESSION['error'])) {
+    echo "<p class='errorDprt'>".  "</p>";
+  }
+?>
+
+
 <title>Admin Department</title>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap" rel="stylesheet">
 <link href = "https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel = "stylesheet">
@@ -119,6 +126,26 @@
       
       </main>
       <!-- End Main -->
+      <script>
+
+        let myerror = document.querySelector(".errorDprt");
+        let myInputs = document.querySelectorAll(".add-department-form input");
+        let mybutton = document.querySelector(".add-department-section");
+       
+        if (myerror != null) 
+        {
+          console.log("not exist")
+          myInputs.forEach((input)=>
+          {
+            input.style.border = "1px solid red";
+          }
+          )
+            let mypara  = document.createElement("p");
+            mypara.className = "errorDpt";
+            mypara.appendChild(document.createTextNode("Department already exist or the head isn't employee"));
+            mybutton.appendChild(mypara);
+        }
+      </script>
       <style>
         
         body {
@@ -194,7 +221,15 @@
           display: none;
           cursor: pointer;
         }
-
+        .errorDprt {
+          display: none;
+        }
+        .errorDpt {
+          color: red;
+          opacity: 0.7;
+          font-size: 12px;
+          text-align: center;
+        }
 
 
         /* ---------- SIDEBAR ---------- */

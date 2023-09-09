@@ -25,7 +25,7 @@
       $data['emp'] = $suerModel->getUsers();
       $data['EmpAll'] = $suerModel->getEmpAll();
 
-       $this->views('Home/Admin/requests', $data);
+       $this->views('Admin/requests', $data);
     }
 
     public function  RequestUser()
@@ -46,6 +46,6 @@
 
       $data['emp'] = $suerModel->getData($_SESSION['userName']);
 
-       $this->views('Home/Employee/requestsEmp', $data);
+       $this->views('Employee/requestsEmp', $data);
     }
   }

@@ -48,10 +48,17 @@
         $this->Database->bind(':head', $head);
         $this->Database->execute();
     }
-    public function check($dpt, $head)
+    public function checkDpr($dpt)
     {
-        $this->Database->query('SELECT COUNT(*) FROM department WHERE dpName = :dpr or headDpt = :head');
+        $this->Database->query('SELECT COUNT(*) FROM department WHERE dpName = :dpr ');
         $this->Database->bind(':dpr', $dpt);
+        $rowCount = $this->Database->fetchColumn(); 
+
+        return ($rowCount > 0);
+    }
+    public function checkHeadDprt($head)
+    {
+        $this->Database->query("SELECT COUNT(*) FROM employes WHERE CONCAT(first_name, ' ', last_name) = :head");
         $this->Database->bind(':head', $head);
         $rowCount = $this->Database->fetchColumn(); 
 

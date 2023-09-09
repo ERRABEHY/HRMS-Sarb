@@ -28,7 +28,7 @@
 
       $data['employeesPr'] = $userData;
 
-        $this->views('Home/Admin/presence', $data);
+        $this->views('Admin/presence', $data);
 
     }
   }

@@ -24,7 +24,7 @@
             }
 
             $data['departmentData'] = $departmentData;
-            $this->views('Home/Admin/department', $data);
+            $this->views('Admin/department', $data);
   
 
     }
@@ -36,7 +36,7 @@
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['editdpt']))
         {
             $data['id'] = $_POST['dprId'];
-            $this->views('Home/Admin/edit_department', $data);
+            $this->views('Admin/edit_department', $data);
             exit();
 
         }elseif ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit'])) {
@@ -56,11 +56,14 @@
             
             $data['headName'] = $_POST['headName'];
             $data['dptName'] = $_POST['dptName'];
-            $permission = $userModel->check($data['dptName'], $data['headName']);
-            if (!$permission ) {
-                $userModel->Insert($data['dptName'], $data['headName']);      
+
+            $permissionDpr = $userModel->checkDpr($data['dptName']);
+            $permissionHead = $userModel->checkHeadDprt($data['headName']);
+            if (!$permissionDpr &&  $permissionHead ) {
+                 unset($_SESSION['error']);
+                $userModel->Insert($data['dptName'], $data['headName']);   
             }else{
-                $_SESSION['message'] = 'data already in the database';
+                $_SESSION['error'] = 'data already in the database';
             }
         }
        $this->dashboard();
