@@ -9,59 +9,17 @@
 
       protected $currentControler = 'Homes';
       protected $currentMethod = 'login';
-      // protected $dptMethod = 'dashboard';
       protected $params = [];
 
       public function __construct()
       {
-        // the requisted url
+        
         $url=$this->getUrl();
-
-
-         if (!empty($url)) {
-            if ($url[0] === 'department') {
-                $this->currentControler = 'Depart';
-                $this->currentMethod = 'dashboard';
-                unset($url[0]);
-
-            }elseif($url[0] === 'dashboard')
-            {
-                $this->currentControler = 'Homes';
-                $this->currentMethod = 'dashboard';
-                unset($url[0]);
-
-            }elseif($url[0] === 'dashboardUser')
-            {
-                $this->currentControler = 'Homes';
-                $this->currentMethod = 'dashboardUser';
-                unset($url[0]);
-
-            }elseif($url[0] === 'editdpt' || $url[0] === 'edit'  || $url[0] === 'addNewDpr'  )
-            {
-                $this->currentControler = 'Depart';
-                $this->currentMethod = 'editdpt';
-                unset($url[0]);
-
-            }elseif($url[0] === 'presence') {
-                $this->currentControler = 'Presences';
-                $this->currentMethod = 'Presence';
-                unset($url[0]);
-            }elseif ($url[0] === 'requests' ) {
-              $this->currentControler = 'Requests';
-                $this->currentMethod = 'Request';
-            }elseif ($url[0] === 'requestEmp' || $url[0] === 'addNewRequest'  ){
-              $this->currentControler = 'Requests';
-                $this->currentMethod = 'RequestUser';
-            }elseif ($url[0] === 'logout') {
-              $this->currentControler = 'Homes';
-                $this->currentMethod = 'login';
-            }
-            // Check if the requested page exists and assign it to currentControler
-            if (isset($url[0]) && file_exists('../app/Controllers/' . ucfirst($url[0]) . '.php')) {
+        
+       if (isset($url[0]) && file_exists('../app/Controllers/' . ucfirst($url[0]) . '.php')) {
                 $this->currentControler = ucfirst($url[0]);
                 unset($url[0]);
             }
-      }
 
         // bring the requisted page from the Controllers
         require_once '../app/Controllers/'.$this->currentControler.'.php';

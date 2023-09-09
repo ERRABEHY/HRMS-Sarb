@@ -20,7 +20,7 @@
     
     public function getUsers()
     {
-        $this->Database->query('SELECT COUNT(*) FROM employee');
+        $this->Database->query('SELECT COUNT(*) FROM employes');
         $count = $this->Database->fetchColumn(); 
         
         return $count;

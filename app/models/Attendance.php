@@ -8,34 +8,23 @@
         $this->Database = new Database();
     }
 
-      public function getUsers()
-        {
-            $this->Database->query('SELECT * FROM attendance');
+    public function getUsers()
+    {
+        $this->Database->query('SELECT * FROM attendance');
 
-            $Users = $this->Database->fetchAll(); 
-            
-            return $Users;
-        }
+        $Users = $this->Database->fetchAll(); 
+        
+        return $Users;
+    }
+    public function getUserName($Id)
+    {
+      $this->Database->query('SELECT * FROM employes WHERE employe_id  = :id');
+      $this->Database->bind(':id', $Id);
 
-         public function getDprt($emp)
-        {
-            $this->Database->query('SELECT department FROM employee WHere full_name = :emp');
-            $this->Database->bind(':emp', $emp); 
+      $Users = $this->Database->fetch(); 
 
-            $Users = $this->Database->fetch(); 
-            
-            return $Users->department;
-        }
-
+      return $Users;
+    }
 
 
-    // public function absentDay($emp){
-
-    //   $this->Database->query('SELECT  presentDay From attendance WHere employee = :emp ');
-    //   $this->Database->bind(':emp', $emp); 
-    //   $absences = $this->Database->fetch();
-
-    //   return $absences->presentDay;
-    // }
-  
   }

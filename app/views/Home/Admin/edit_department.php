@@ -6,7 +6,7 @@
 </head>
 <body>
     <div class="container">
-        <form class="add-department-section" method="post" action="edit">
+        <form class="add-department-section" method="post" action="editdpt">
             <h1>Edit Department</h1>
             <input type="hidden" name="Id" value="<?= $data['id'] ?>">
             <div class="add-department-form">

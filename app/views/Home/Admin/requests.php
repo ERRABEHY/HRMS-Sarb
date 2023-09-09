@@ -8,7 +8,7 @@
           <span class="material-icons-outlined">menu</span>
         </div>
         <div class="header-right">
-            <a href="logout">
+            <a href="/Sarb-HRMS/public/Homes/login">
             <span class="material-symbols-outlined">logout</span>
           </a>
           
@@ -23,15 +23,14 @@
             </div>
             <span class="material-icons-outlined" onclick="closeSidebar()">close</span>
           </div>
-  
           <ul class="sidebar-list">
             <li class="sidebar-list-item">
-              <a href="dashboard" >
+              <a href="/Sarb-HRMS/public/Homes/dashboard" >
                 <span class="material-icons-outlined">dashboard</span> Dashboard
               </a>
             </li>
             <li class="sidebar-list-item">
-              <a href="department" >
+              <a href="/Sarb-HRMS/public/Depart/dashboard" >
                 <span class="material-icons-outlined">
                   assured_workload </span> Departments
               </a>
@@ -42,7 +41,7 @@
               </a>
             </li>
             <li class="sidebar-list-item">
-              <a href="presence" >
+              <a href="/Sarb-HRMS/public/Presences/Presence" >
                 <span class="material-icons-outlined">view_list  </span> Presence
               </a>
             </li>
@@ -52,22 +51,22 @@
               </a>
             </li>
             <li class="sidebar-list-item">
-              <a href="requests" >
+              <a href="/Sarb-HRMS/public/Requests/Request" >
                 <span class="material-icons-outlined"> note_alt</span> Requests 
               </a>
             </li>
             <li class="sidebar-list-item">
-              <a href="../Events/Events.html" >
-                <span class="material-icons-outlined"> event </span> Events
-              </a>
-            </li>
+                <a href="../Events/Events.html" >
+                  <span class="material-icons-outlined"> event </span> Events
+                </a>
+              </li>
           </ul>
         </aside>
       <main class="main-container">
         <div class="main-title">
           <h2>Pending Requests</h2>
         </div>
-          <table class="main-cards">
+          <table class="mainRequest">
                <th >
                   <tr class="th">
                     <td>Id </td>
@@ -88,7 +87,7 @@
                             <td><?= $value->type ?></td>                         
                             <td><?= $value->description ?></td>                         
                             <td>
-                              <form action="requests" method="post">
+                              <form action="/Sarb-HRMS/public/Requests/Request" method="post">
                                 <input type="hidden" name="Id" value="<?= $value->id ?>" >
                                 <input type="hidden" name="emp" value="<?= $value->emp ?>" >
                                 <input type="hidden" name="type" value="<?= $value->type ?>" >
@@ -113,7 +112,7 @@
           <div class="main-title">
           <h2>Requests History </h2>
         </div>
-          <table class="main-cards">
+          <table class="mainRequest">
                <th >
                   <tr class="th">
                     <td>Id </td>
@@ -296,7 +295,7 @@ body {
   justify-content: space-between;
   color: #312020; /* Set the color to black */
 }
-.main-cards {
+.mainRequest {
   grid-area: main;
   color: black;
   width: 100%;
@@ -306,50 +305,47 @@ table td {
   position: relative;
 
 }
-.main-cards td {
+.mainRequest td {
   padding: 10px;
 }
-.main-cards .tbody td {
+.mainRequest .tbody td {
   color: #666262ce;
 }
-.main-cards .tbody {
+.mainRequest .tbody {
   color: white;
 }
-.main-cards .th {
+.mainRequest .th {
   background-color: #b3aeaea1;
 }
 
-.main-cards .th td {
+.mainRequest .th td {
   padding: 15px;
 }
 
-
-.main-cards td .del {
-  background-color: rgba(255, 0, 0, 0.685);
+.mainRequest td .del {
+  color: rgba(255, 0, 0, 0.685);
 }
-.main-cards button {
+.mainRequest button {
   border: 0px;
   outline: 0px;
   background-color: transparent;
   cursor: pointer;
 }
-.main-cards button span {
-  padding: 4px;
-  border-radius: 50%;
-  color: white;
+.mainRequest td .edit {
+  color: red;
 }
-.main-cards td .edit {
-  background-color: rgba(0, 128, 0, 0.671);
+.mainRequest td .edit {
+  color: rgba(0, 128, 0, 0.671);
 }
-.main-cards tr .Rejected {
+.mainRequest tr .Rejected {
   color: red;
 }
 
-.main-cards tr .Approved {
+.mainRequest tr .Approved {
  color: rgba(0, 128, 0, 0.671);
 }
 
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 1200px) {
   .grid-container {
     grid-template-columns: 1fr;
     grid-template-rows: 0.2fr 3fr;
@@ -370,18 +366,18 @@ table td {
     display: inline;
   }
 
-  .main-cards .main-title {
+  .mainRequest .main-title {
     text-align: center;
   }
 
-  .main-cards .tbody td {
+  .mainRequest .tbody td {
     background-color: rgba(0, 0, 0, 0.05);
     border-radius: 6px;
     margin-bottom: 10px;
     overflow: hidden;
   }
   
-  .main-cards td {
+  .mainRequest td {
     padding: 10px;
   }
 }

@@ -10,24 +10,23 @@
        $userData = [];
 
       foreach ($data['users'] as $key => $value) {
-        $userName = $value->employee;
+        $userId = $value->employee_id ;
         $userAbt = $value->absnt;
         $userPres = $value->present;
-        $userType = $value->boolean;
         $presentDay = $value->presentDay;
-        $Dept = $suerModel->getDprt($userName);
+        $username = $suerModel->getUserName($userId);
 
        $userData[] = [
-        'empName' => $userName,
+        'empId' => $userId,
+        'empName' => $username->first_name . " " . $username->last_name,
         'Absences' => $userAbt,
         'Presences' => $userPres,
         'presentDay' => $presentDay,
-        'Dept' => $Dept,
        ];
 
       }
 
-      $data['employees'] = $userData;
+      $data['employeesPr'] = $userData;
 
         $this->views('Home/Admin/presence', $data);
 

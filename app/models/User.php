@@ -10,8 +10,7 @@
 
         public function validateUser($email, $password)
         {
-            // $hashedPassword = hash('sha256', $password);
-            $this->Database->query('SELECT * FROM users WHERE Email = :email AND passwd = :password');
+            $this->Database->query('SELECT * FROM employes WHERE email = :email AND password = :password');
             $this->Database->bind(':email', $email);
             $this->Database->bind(':password', $password);
             $user = $this->Database->fetch(); 
@@ -27,22 +26,21 @@
         }
 
         public function getUser($email)
-{
-    $this->Database->query('SELECT full_name FROM employee WHERE email = :email ');
-    $this->Database->bind(':email', $email);
-    $user = $this->Database->fetch(); 
+        {
+            $this->Database->query('SELECT * FROM employes WHERE email = :email ');
+            $this->Database->bind(':email', $email);
+            $user = $this->Database->fetch(); 
 
-    if ($user) {
-        return $user->full_name;
-    } else {
-        return null; 
-    }
-}
-
+            if ($user) {
+                return $user;
+            } else {
+                return null; 
+            }
+        }
 
         public function checkAttendance($user)
         {
-            $this->Database->query('SELECT * FROM attendance  WHERE employee = :user');
+            $this->Database->query('SELECT * FROM attendance  WHERE employee_id = :user');
             $this->Database->bind(':user', $user);
             $User = $this->Database->fetch(); 
             
@@ -51,7 +49,7 @@
         
         public function addPrs($emp)
         {
-            $this->Database->query('SELECT * FROM attendance  WHERE employee = :user');
+            $this->Database->query('SELECT * FROM attendance  WHERE employee_id = :user');
             $this->Database->bind(':user', $emp);
             $User = $this->Database->fetch(); 
 
@@ -61,7 +59,7 @@
             $newAbsDayValue =                       0;
             $date           = date("Y-m-d");
             
-            $this->Database->query('UPDATE attendance SET present = :pre, absnt =:abs , absentDay = :absday, presentDay = :prdy, datetm = :dtm WHERE employee = :user');
+            $this->Database->query('UPDATE attendance SET present = :pre, absnt =:abs , absentDay = :absday, presentDay = :prdy, datetm = :dtm WHERE employee_id = :user');
             $this->Database->bind(':pre', $newPrsValue);
             $this->Database->bind(':abs', $newAbsValue);
             $this->Database->bind(':absday', $newAbsDayValue);
@@ -93,7 +91,7 @@
     
         public function getPrDay($emp)
         {
-            $this->Database->query('SELECT presentDay FROM attendance  WHERE employee = :user');
+            $this->Database->query('SELECT presentDay FROM attendance  WHERE employee_id = :user');
             $this->Database->bind(':user', $emp);
             $User = $this->Database->fetch();
             
@@ -102,7 +100,7 @@
 
         public function getAttendance($emp)
         {
-            $this->Database->query('SELECT absnt, present FROM attendance  WHERE employee = :user');
+            $this->Database->query('SELECT absnt, present FROM attendance  WHERE employee_id = :user');
             $this->Database->bind(':user', $emp);
             $User = $this->Database->fetch();
             

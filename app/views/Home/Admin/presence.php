@@ -8,7 +8,7 @@
           <span class="material-icons-outlined">menu</span>
         </div>
         <div class="header-right">
-            <a href="logout">
+            <a href="/Sarb-HRMS/public/Homes/login">
             <span class="material-symbols-outlined">logout</span>
           </a>
           
@@ -25,66 +25,63 @@
           </div>
   
           <ul class="sidebar-list">
-            <li class="sidebar-list-item">
-              <a href="dashboard" >
-                <span class="material-icons-outlined">dashboard</span> Dashboard
-              </a>
-            </li>
-            <li class="sidebar-list-item">
-              <a href="department" >
-                <span class="material-icons-outlined">
-                  assured_workload </span> Departments
-              </a>
-            </li>
-            <li class="sidebar-list-item">
-              <a href="../Employees/staf.html" >
-                <span class="material-icons-outlined"> face</span> Employees
-              </a>
-            </li>
-            <li class="sidebar-list-item">
-              <a href="presence" >
-                <span class="material-icons-outlined">view_list  </span> Presence
-              </a>
-            </li>
-            <li class="sidebar-list-item">
-              <a href="../salaries/salaries.html" >
-                <span class="material-icons-outlined">credit_score</span> salaries
-              </a>
-            </li>
-            <li class="sidebar-list-item">
-              <a href="requests" >
-                <span class="material-icons-outlined"> note_alt</span> Requests 
-              </a>
-            </li>
-            <li class="sidebar-list-item">
-              <a href="../Events/Events.html" >
-                <span class="material-icons-outlined"> event </span> Events
-              </a>
-            </li>
-          </ul>
+                <li class="sidebar-list-item">
+                  <a href="/Sarb-HRMS/public/Homes/dashboard" >
+                    <span class="material-icons-outlined">dashboard</span> Dashboard
+                  </a>
+                </li>
+                <li class="sidebar-list-item">
+                  <a href="/Sarb-HRMS/public/Depart/dashboard" >
+                    <span class="material-icons-outlined">
+                      assured_workload </span> Departments
+                  </a>
+                </li>
+                <li class="sidebar-list-item">
+                  <a href="../Employees/staf.html" >
+                    <span class="material-icons-outlined"> face</span> Employees
+                  </a>
+                </li>
+                <li class="sidebar-list-item">
+                  <a href="/Sarb-HRMS/public/Presences/Presence" >
+                    <span class="material-icons-outlined">view_list  </span> Presence
+                  </a>
+                </li>
+                <li class="sidebar-list-item">
+                  <a href="../salaries/salaries.html" >
+                    <span class="material-icons-outlined">credit_score</span> salaries
+                  </a>
+                </li>
+                <li class="sidebar-list-item">
+                  <a href="/Sarb-HRMS/public/Requests/Request" >
+                    <span class="material-icons-outlined"> note_alt</span> Requests 
+                  </a>
+                </li>
+                <li class="sidebar-list-item">
+                  <a href="../Events/Events.html" >
+                    <span class="material-icons-outlined"> event </span> Events
+                  </a>
+                </li>
         </aside>
       <main class="main-container">
         <div class="main-title">
           <h2>Presence Of Today</h2>
         </div>
-          <table class="main-cards">
+          <table class="mainData">
                <th >
                   <tr class="th">
                     <td>Id </td>
                     <td>Employees</td>
-                    <td>Department</td>
                     <td >Status</td>
                   </tr>
                </th>
                 <tbody class="tbody">
                    <?php 
                     $id = 1;
-                    foreach ($data['employees'] as $key => $value) {
+                    foreach ($data['employeesPr'] as $key => $value) {
                     ?>
                         <tr>
                             <td><?= $id++ ?></td>
                             <td><?= $value['empName'] ?></td>
-                            <td><?= $value['Dept'] ?></td>
                             <?php  
             
                             if ($value['presentDay'] == 1) {
@@ -105,12 +102,11 @@
           <div class="main-title">
           <h2>Attendance History </h2>
         </div>
-          <table class="main-cards">
-               <th >
+          <table class="mainData">
+               <th>
                   <tr class="th">
                     <td>Id </td>
                     <td>Employees</td>
-                    <td>Department</td>
                     <td class="text-green">Presences</td>
                     <td class="text-red">Absences</td>
                   </tr>
@@ -118,12 +114,11 @@
                 <tbody class="tbody">
                   <?php 
                     $id = 1;
-                    foreach ($data['employees'] as $key => $value) {
+                    foreach ($data['employeesPr'] as $key => $value) {
                     ?>
                         <tr>
                             <td><?= $id++ ?></td>
                             <td><?= $value['empName'] ?></td>
-                            <td><?= $value['Dept'] ?></td>
                             <td><?= $value['Presences'] ?></td>
                             <td><?= $value['Absences'] ?></td>
                         </tr>                  
@@ -282,7 +277,7 @@ body {
   justify-content: space-between;
   color: #312020; /* Set the color to black */
 }
-.main-cards {
+.mainData {
   grid-area: main;
   color: black;
   width: 100%;
@@ -292,39 +287,39 @@ table td {
   position: relative;
 
 }
-.main-cards td {
+.mainData td {
   padding: 10px;
 }
-.main-cards .tbody td {
+.mainData .tbody td {
   color: #666262ce;
 }
-.main-cards .tbody {
+.mainData .tbody {
   color: white;
 }
-.main-cards .th {
+.mainData .th {
   background-color: #b3aeaea1;
 }
 
-.main-cards .th td {
+.mainData .th td {
   padding: 15px;
 }
 
-.main-cards .tbody tr td:last-child {
+.mainData .tbody tr td:last-child {
   padding: 5px;
   width: 100px;
   border-radius: 30px;
   margin: 20px;
 }
 
-.main-cards tr .Absent {
+.mainData tr .Absent {
   color: red;
 }
 
-.main-cards tr .Present {
+.mainData tr .Present {
  color: rgba(0, 128, 0, 0.671);
 }
 
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 1200px) {
   .grid-container {
     grid-template-columns: 1fr;
     grid-template-rows: 0.2fr 3fr;
@@ -345,18 +340,18 @@ table td {
     display: inline;
   }
 
-  .main-cards .main-title {
+  .mainData .main-title {
     text-align: center;
   }
 
-  .main-cards .tbody td {
+  .mainData .tbody td {
     background-color: rgba(0, 0, 0, 0.05);
     border-radius: 6px;
     margin-bottom: 10px;
     overflow: hidden;
   }
   
-  .main-cards td {
+  .mainData td {
     padding: 10px;
   }
 }

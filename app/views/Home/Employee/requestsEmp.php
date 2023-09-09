@@ -10,9 +10,8 @@
         <div class="menu-icon" onclick="openSidebar()">
           <span class="material-icons-outlined">menu</span>
         </div>
-        <h2 class="welcome" ><?= "Mrs. " . $_SESSION['userName'] ?></h2>
         <div class="header-right">
-          <a href="logout">
+          <a href="/Sarb-HRMS/public/Homes/login">
             <span class="material-symbols-outlined">logout</span>
           </a>
         </div>
@@ -29,7 +28,7 @@
   
           <ul class="sidebar-list">
             <li class="sidebar-list-item">
-              <a href="dashboardUser" >
+              <a href="/Sarb-HRMS/public/Homes/dashboardUser" >
                 <span class="material-icons-outlined">dashboard</span> Dashboard
               </a>
             </li>
@@ -39,17 +38,12 @@
               </a>
             </li>
             <li class="sidebar-list-item">
-              <a href="presence" >
-                <span class="material-icons-outlined">view_list  </span> Presence
-              </a>
-            </li>
-            <li class="sidebar-list-item">
               <a href="../salaries/salaries.html" >
                 <span class="material-icons-outlined">credit_score</span> salaries
               </a>
             </li>
             <li class="sidebar-list-item">
-              <a href="requestEmp" >
+              <a href="/Sarb-HRMS/public/Requests/RequestUser" >
                 <span class="material-icons-outlined"> note_alt</span> Requests 
               </a>
             </li>
@@ -66,7 +60,7 @@
          <div class="main-title">
           <h2>Requests History </h2>
         </div>
-          <table class="main-cards">
+          <table class="mainDashboard">
                <th >
                   <tr class="th">
                     <td>Id </td>
@@ -100,7 +94,7 @@
                 </tbody>
           </table>
           <hr>
-           <form class="add-department-section" action="addNewRequest" method="post">
+           <form class="add-department-section" action="/Sarb-HRMS/public/Requests/RequestUser" method="post">
           <h2>Add a New Request</h2>
           <div class="add-department-form">
             <select name="reqName" require>
@@ -267,7 +261,7 @@ body {
   color: #312020; /* Set the color to black */
 }
 
-.main-cards {
+.mainDashboard {
   color: black;
   width: 100%;
 
@@ -275,43 +269,59 @@ body {
 table td {
   text-align: center;
 }
-.main-cards td {
+.mainDashboard td {
   padding: 10px;
 }
-.main-cards .tbody td {
+.mainDashboard .tbody td {
   color: #666262ce;
 }
-.main-cards .tbody {
+.mainDashboard .tbody {
   color: white;
 }
-.main-cards .th {
+.mainDashboard .th {
   background-color: #b3aeaea1;
 }
-.main-cards .th td {
+.mainDashboard .th td {
   padding: 15px;
 }
-.main-cards td .material-symbols-outlined {
+.mainDashboard td .material-symbols-outlined {
   color: white;
   padding: 5px;
   border-radius: 30px;
   opacity: 0.7;
 }
-.main-cards tr .Rejected {
+.mainDashboard tr .Rejected {
   color: red;
 }
 
-.main-cards tr .Approved {
+.mainDashboard tr .Approved {
  color: green;
 }
-.main-cards tr .Pending {
+.mainDashboard tr .Pending {
  color: orange;
 }
-
+select {
+  position: relative;
+  outline: 0;
+  padding: 10px;
+  border-width: 1px;
+  background-color: transparent;
+  border-radius: 10px;
+}
+select option {
+  appearance: none;
+  padding: 10px;
+  color: black;
+}
+select option:checked {
+  font-size: 17px;
+  padding: 10px;
+}
 /* ---------- MEDIA QUERIES ---------- */
 
 /* Medium <= 992px */
 
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 1200px) {
   .grid-container {
     grid-template-columns: 1fr;
     grid-template-rows: 0.2fr 3fr;
@@ -332,25 +342,25 @@ table td {
     display: inline;
   }
  
-  .main-cards .main-title {
+  .mainDashboard .main-title {
     text-align: center;
   }
 
-  .main-cards .th {
+  .mainDashboard .th {
     display: none;
   }
 
-  .main-cards .tbody tr {
+  .mainDashboard .tbody tr {
     background-color: rgba(0, 0, 0, 0.05);
     border-radius: 6px;
     margin-bottom: 10px;
   }
 
-  .main-cards td {
+  .mainDashboard td {
     padding: 10px;
   }
 
-  .main-cards td .material-symbols-outlined {
+  .mainDashboard td .material-symbols-outlined {
     padding: 3px;
     border-radius: 50%;
     opacity: 1;
@@ -424,7 +434,7 @@ table td {
 
 
 @media screen and (max-width: 768px) {
-  .main-cards {
+  .mainDashboard {
     grid-template-columns: 1fr;
     gap: 10px;
     margin-bottom: 0;

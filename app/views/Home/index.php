@@ -1,14 +1,14 @@
 <?php require_once '../app/views/Inc/header.php'; 
 if (!empty($data['error'])) {
-    echo  $data['error'];
+    echo"<p class='error'>" . "</p>";
 }
 ?>
 
 <div id="bg"></div>
   
-  <h1 style="text-align: center; font-size: 36px; color: #47AB11;">S.A.R.B Company</h1>
-  
-  <form action="index.php?action=login" method = "post">
+  <h1 class="title">S.A.R.B</h1>
+
+  <form action="" method = "post">
     <div class="form-field">
       <input type="email" name="email" placeholder="Email" required/>
     </div>
@@ -16,12 +16,30 @@ if (!empty($data['error'])) {
     <div class="form-field">
       <input type="password" name="passwd" placeholder="Password" required/>
     </div>
-    
-    <div class="form-field">
+    <div class="form-field btnplace">
+    </div>
+    <div class="form-field btnplace">
       <button class="btn" type="submit" name="submit">Log in</button>
     </div>
   </form>
 
+<script>
+  let myError = document.querySelector('.error');
+  let myInputs = document.querySelectorAll('.form-field input');
+  let myButton = document.querySelector('form .btnplace');
+
+  if (myError != null) 
+  {
+    myInputs.forEach((input)=>{
+      input.style.border = "1px solid red";
+    });
+   let myPara = document.createElement('p');
+   myPara.className = "error";
+   myPara.appendChild(document.createTextNode("Invalid email or password."));
+   myButton.appendChild(myPara);
+  }
+
+</script>
 <style>
     @import url("https://fonts.googleapis.com/css?family=Lato:400,700");
     #bg {
@@ -34,7 +52,7 @@ if (!empty($data['error'])) {
     height: 100%;
     background-size: cover;
     filter: blur(5px);
-    z-index: -1; /* Set z-index to a negative value */
+    z-index: -1; 
   }
   
     
@@ -57,7 +75,7 @@ if (!empty($data['error'])) {
     margin-bottom: 20px;
     z-index: 1;
     position: relative;
-    align-self: flex-start; /* Align only the title to the top */
+    text-align: center;
   }
   
   form {
@@ -103,6 +121,11 @@ if (!empty($data['error'])) {
       align-items: center;
       margin-bottom: 1rem;
       position: relative;
+    } 
+    .error {
+      color: red;
+      opacity: 0.5;
+      position: absolute;
     }
     
     form input {
@@ -119,6 +142,12 @@ if (!empty($data['error'])) {
       color: #4A4A4A;
       text-indent: 40px;
     }
+    form input::placeholder {
+      transition: 0.5s;
+    }
+    form input:focus::placeholder {
+      opacity: 0;
+    }
     
     form .btn {
       outline: none;
@@ -133,6 +162,14 @@ if (!empty($data['error'])) {
       border-radius: 4px;
       box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
       font-size: 17px;
+      transition: 0.5s;
+    }
+
+    form .btn:hover {
+      background-color: #fff;
+      color: #47AB11;
+      box-shadow: 5px 5px 7px rgba(0, 0, 0, 0.16);
+
     }
     
   </style>

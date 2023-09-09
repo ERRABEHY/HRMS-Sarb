@@ -8,10 +8,9 @@
         <div class="menu-icon" onclick="openSidebar()">
           <span class="material-icons-outlined">menu</span>
         </div>
-        <h2 class="welcome" ><?= "Mrs. " . $_SESSION['userName'] ?></h2>
+        <div class="userName" ><?= "Mrs. ".$_SESSION['userName'] ?></div>
         <div class="header-right">
-          <span class="material-icons-outlined">account_circle</span>
-          <a href="logout">
+          <a href="/Sarb-HRMS/public/Homes/login">
             <span class="material-symbols-outlined">logout</span>
           </a>
         </div>
@@ -26,7 +25,7 @@
       
               <ul class="sidebar-list">
                 <li class="sidebar-list-item">
-                  <a href="dashboard" >
+                  <a href="/Sarb-HRMS/public/Homes/dashboardUser" >
                     <span class="material-icons-outlined">dashboard</span> Dashboard
                   </a>
                 </li>
@@ -34,17 +33,16 @@
                   <a href="../Employees/staf.html" >
                     <span class="material-icons-outlined"> face</span> Employees
                   </a>
-                </li>
                 <li class="sidebar-list-item">
                   <a href="../salaries/salaries.html" >
                     <span class="material-icons-outlined">credit_score</span> salaries
                   </a>
                 </li>
                 <li class="sidebar-list-item">
-                  <a href="requestEmp" >
-                    <span class="material-icons-outlined"> note_alt</span> Requests 
-                  </a>
-                </li>
+              <a href="/Sarb-HRMS/public/Requests/RequestUser" >
+                <span class="material-icons-outlined"> note_alt</span> Requests 
+              </a>
+            </li>
                 <li class="sidebar-list-item">
                   <a href="../Events/Events.html" >
                     <span class="material-icons-outlined"> event </span> Events
@@ -76,7 +74,7 @@
             </div>
             <span class="text-primary font-weight-bold"><?= $data['attendance']->absnt?></span>
           </a>
-          <a href ="requestEmp" class="card">
+          <a href ="/Sarb-HRMS/public/Requests/RequestUser" class="card">
             <div class="card-inner">
               <p class="text-primary">Requests</p>
               <span class="material-symbols-outlined text-blue1">notification_add</span>
@@ -185,9 +183,6 @@
 .menu-icon {
   display: none;
   cursor: pointer;
-}
-.header h2 {
-    text-transform: uppercase;
 }
 
 /* ---------- SIDEBAR ---------- */
@@ -360,6 +355,12 @@
   .sidebar-title > span {
     display: inline;
   }
+  .header .userName {  
+    font-size: 10px;
+    left: 50%;
+    position: absolute;
+    transform: translateX(-50%);
+}
 }
 
 /* Small <= 768px */

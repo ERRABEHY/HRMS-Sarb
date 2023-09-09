@@ -15,7 +15,7 @@
     }
     public function getSum($dpr)
     {
-        $this->Database->query('SELECT COUNT(Email) as sumEmp From employee Where  department = :dpt');
+        $this->Database->query('SELECT COUNT(employe_id) as sumEmp From professional_info Where  department = :dpt');
         $this->Database->bind(':dpt', $dpr);
          $result = $this->Database->fetch();
 

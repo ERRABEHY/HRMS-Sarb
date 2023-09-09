@@ -8,10 +8,11 @@
         <div class="menu-icon" onclick="openSidebar()">
           <span class="material-icons-outlined">menu</span>
         </div>
-                <?= "Mrs. " . $data['message'] ?>
+           <div class="userName">
+              <?= "Mrs. " . $data['message'] ?>
+           </div>
         <div class="header-right">
-          <span class="material-icons-outlined">account_circle</span>
-          <a href="logout">
+          <a href="/Sarb-HRMS/public/Homes/login">
             <span class="material-symbols-outlined">logout</span>
           </a>
         </div>
@@ -24,7 +25,7 @@
                 <div class="sidebar-brand">
                   <span class="material-icons-outlined ">inventory</span> S.A.R.B
                 </div>
-                <span class="material-icons-outlined" onclick="closeSidebar()">close</span>
+                <span class="material-icons-outlined close" onclick="closeSidebar()">close</span>
               </div>
       
               <ul class="sidebar-list">
@@ -34,7 +35,7 @@
                   </a>
                 </li>
                 <li class="sidebar-list-item">
-                  <a href="department" >
+                  <a href="/Sarb-HRMS/public/Depart/dashboard" >
                     <span class="material-icons-outlined">
                       assured_workload </span> Departments
                   </a>
@@ -45,7 +46,7 @@
                   </a>
                 </li>
                 <li class="sidebar-list-item">
-                  <a href="presence" >
+                  <a href="/Sarb-HRMS/public/Presences/Presence" >
                     <span class="material-icons-outlined">view_list  </span> Presence
                   </a>
                 </li>
@@ -55,7 +56,7 @@
                   </a>
                 </li>
                 <li class="sidebar-list-item">
-                  <a href="requests" >
+                  <a href="/Sarb-HRMS/public/Requests/Request" >
                     <span class="material-icons-outlined"> note_alt</span> Requests 
                   </a>
                 </li>
@@ -75,7 +76,7 @@
         </div>
 
         <div class="main-cards">
-          <a href="department" class="card">
+          <a href="/Sarb-HRMS/public/Depart/dashboard" class="card">
             <div class="card-inner">
               <p class="text-primary">Departments</p>
               <span class="material-icons-outlined text-blue">inventory_2</span>
@@ -89,7 +90,7 @@
             </div>
             <span class="text-primary font-weight-bold"><?= $data['employees'] ?> </span>
           </a>
-          <a href ="presence"  class="card">
+          <a href ="/Sarb-HRMS/public/Presences/Presence"  class="card">
             <div class="card-inner">
               <p class="text-primary">Presents</p>
               <span class="material-symbols-outlined text-green">how_to_reg</span>
@@ -97,14 +98,15 @@
             <span class="text-primary font-weight-bold"><?= $data['presents'] ?> </span>
           </a>
 
-          <a href ="presence" class="card">
+          <a href ="/Sarb-HRMS/public/Presences/Presence"  class="card">
             <div class="card-inner">
               <p class="text-primary">Absents</p>
               <span class="material-symbols-outlined text-red">unpublished</span>
             </div>
             <span class="text-primary font-weight-bold"><?= $data['absents']  ?></span>
           </a>
-          <a href ="requests" class="card">
+
+          <a href ="/Sarb-HRMS/public/Requests/Request" class="card">
             <div class="card-inner">
               <p class="text-primary">Requests</p>
               <span class="material-symbols-outlined text-blue1">notification_add</span>
@@ -202,10 +204,10 @@
   padding: 0 30px 0 30px;
   box-shadow: 0 6px 7px -4px rgba(0, 0, 0, 0.2);
 }
-.header-right {
-  position: absolute;
-  right: 20px;
-}
+/* .header-right {
+  position: absolute; 
+  right: 20px; 
+} */
 .header-right  a {
   color: #666666;
 }
@@ -237,6 +239,7 @@
 
 .sidebar-title > span {
   display: none;
+  cursor: pointer
 }
 
 .sidebar-brand {
@@ -359,50 +362,6 @@
   font-size: 35px;
 }
 
-.charts {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-}
-
-.charts-card {
-  background-color: #ffffff;
-  margin-bottom: 20px;
-  padding: 25px;
-  box-sizing: border-box;
-  -webkit-column-break-inside: avoid;
-  border: 1px solid #d2d2d3;
-  border-radius: 5px;
-  box-shadow: 0 6px 7px -4px rgba(0, 0, 0, 0.2);
-}
-
-.chart-title {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 22px;
-  font-weight: 600;
-}
-
-
-::-webkit-scrollbar {
-  width: 5px;
-  height: 6px;
-}
-
-::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 5px #a5aaad;
-  border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb {
-  background-color: #4f35a1;
-  border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background-color: #a5aaad;
-}
 
 
 
@@ -426,6 +385,11 @@
   .sidebar-title > span {
     display: inline;
   }
+  .header .userName {  
+  left: 50%;
+  position: absolute;
+  transform: translateX(-50%);
+}
 }
 
 @media screen and (max-width: 768px) {
@@ -447,6 +411,7 @@
   }
 }
 </style>
+ 
 <?php require_once '../app/views/Inc/footer.php'; ?>
 
 
